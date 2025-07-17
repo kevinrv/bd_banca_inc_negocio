@@ -74,8 +74,7 @@ Crea una función que retorne el estado del cumplimiento (Cumplido, Parcial, Inc
 
 
 
-
-🧠 CASO DE INTELIGENCIA DE NEGOCIOS
+#🧠 CASO DE INTELIGENCIA DE NEGOCIOS
 Banca: Análisis Estratégico de Indicadores de Desempeño
 🏢 Contexto Empresarial
 El banco FinanzAS, en su proceso de transformación digital, busca mejorar la toma de decisiones gerenciales mediante el uso de soluciones de Inteligencia de Negocios (BI). Actualmente, la información sobre indicadores de desempeño se encuentra dispersa en sistemas transaccionales, reportes manuales y hojas Excel.
