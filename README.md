@@ -1,4 +1,4 @@
-# bd_banca_inc_negocio
+# bd_banca_inc_negocio: caso BD transaccional
 
 Perfecto, aquí tienes un caso propuesto sobre el tema "Banca: Gestión de Indicadores de Negocio". Este caso es adecuado para diseñar un modelo de base de datos relacional y trabajar conceptos como normalización, relaciones jerárquicas, funciones, vistas analíticas y reportes.
 
@@ -71,4 +71,69 @@ Diseña una vista que calcule el cumplimiento diario de cada sucursal por indica
 Crea una función que retorne el estado del cumplimiento (Cumplido, Parcial, Incumplido).
 
 ¿Cómo modelarías el caso si se quiere añadir también indicadores mensuales?
+
+
+
+
+🧠 CASO DE INTELIGENCIA DE NEGOCIOS
+Banca: Análisis Estratégico de Indicadores de Desempeño
+🏢 Contexto Empresarial
+El banco FinanzAS, en su proceso de transformación digital, busca mejorar la toma de decisiones gerenciales mediante el uso de soluciones de Inteligencia de Negocios (BI). Actualmente, la información sobre indicadores de desempeño se encuentra dispersa en sistemas transaccionales, reportes manuales y hojas Excel.
+
+La dirección general ha solicitado desarrollar una solución de BI que integre toda la información de indicadores para permitir análisis histórico, comparativo, predictivo y de desempeño por zonas, sucursales, periodos e indicadores.
+
+🎯 Objetivos del Proyecto BI
+Integrar los datos operativos de metas e indicadores en un Data Warehouse.
+
+Construir una solución que permita analizar:
+
+Cumplimiento de indicadores a lo largo del tiempo.
+
+Desempeño por zona, tipo de indicador y sucursal.
+
+Tendencias y variaciones mensuales o anuales.
+
+Alertas acumuladas y desviaciones recurrentes.
+
+Facilitar el acceso a la información mediante dashboards interactivos en Power BI, Tableau u otra herramienta de visualización.
+
+Crear un modelo multidimensional para consultas OLAP.
+
+📦 Fuentes de Datos
+Sistema Transaccional SQL Server (indicadores, metas, valores diarios).
+
+Archivos Excel con metas históricas y correcciones manuales.
+
+Reportes PDF generados por áreas comerciales.
+
+API interna para cargar metas planificadas a futuro.
+
+📐 Modelo Dimensional Propuesto (Estrella)
+📌 Tabla de Hechos: hechos_indicadores
+Campo	Descripción
+id_sucursal	FK sucursal
+id_indicador	FK indicador
+id_fecha	FK tiempo
+valor_meta	Meta del día
+valor_real	Valor registrado
+desviacion	Diferencia (real - meta)
+cumplimiento_pct	% de cumplimiento
+alerta	Estado: Verde / Amarillo / Rojo
+
+📅 Dimensiones
+dim_tiempo: día, mes, trimestre, año, día de la semana, feriado
+
+dim_sucursal: nombre, código, zona, región
+
+dim_indicador: nombre, tipo, unidad, fórmula de cálculo
+
+dim_alerta: código, nivel de severidad, color, descripción
+
+📊 Indicadores Clave para el Dashboard
+Indicador	Descripción
+% Cumplimiento Diario Promedio	Por zona, por indicador
+N° de Alertas Rojas por Semana	Evaluación de desempeño crítico
+Ranking de Sucursales	Por cumplimiento general
+Top 5 Indicadores con Mayor Incumplimiento	Análisis por tipo
+Evolución Temporal del Cumplimiento	Gráfico de líneas
 
