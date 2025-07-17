@@ -136,3 +136,42 @@ Ranking de Sucursales	Por cumplimiento general
 Top 5 Indicadores con Mayor Incumplimiento	Análisis por tipo
 Evolución Temporal del Cumplimiento	Gráfico de líneas
 
+🔍 Requerimientos Analíticos
+Tendencia mensual del cumplimiento por zona e indicador.
+
+Mapas de calor por zona y tipo de indicador.
+
+Comparativo año a año del cumplimiento por sucursal.
+
+Alertas acumuladas por tipo de indicador.
+
+Desempeño acumulado por trimestre y región.
+
+KPI de mejora vs. año anterior.
+
+🧠 Casos de uso de BI
+Gerencia Comercial: Visualizar sucursales de bajo rendimiento para reforzar campañas.
+
+Planificación Estratégica: Evaluar la efectividad de las metas asignadas.
+
+Auditoría Interna: Detectar anomalías frecuentes por manipulación de datos.
+
+Gestión de Riesgos: Supervisar cumplimiento de KPIs normativos.
+
+🛠️ Retos para el Desarrollador BI
+Diseña el esquema en estrella del data warehouse.
+
+Implementa un ETL que convierta los datos operacionales en hechos y dimensiones limpias.
+
+Crea un tablero interactivo con filtros por mes, zona e indicador.
+
+Define medidas calculadas como:
+
+% Cumplimiento (real/meta)
+
+Número de alertas acumuladas
+
+Sucursal con mayor desviación
+
+Propón un mecanismo de actualización diaria automática del cubo
+
