@@ -1,3 +1,4 @@
 # Diagrama Entidad/Relación
-<img width="1567" height="813" alt="PEDAN5-MODELO CONCEPTUAL" src="https://github.com/user-attachments/assets/ee5505ff-e770-410e-8c69-188def566264" />
+![PEDAN5-MODELO CONCEPTUAL](https://github.com/user-attachments/assets/9b3502e0-fff1-4480-b26d-be1e5658d6c6)
+
 # Diseño Lógico
