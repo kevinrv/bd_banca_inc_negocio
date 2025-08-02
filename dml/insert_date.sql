@@ -110,13 +110,33 @@ FROM indicadores i
 	INNER JOIN tipos_indicador ti ON ti.id=i.tipo_indicador_id
 GROUP BY ti.nombre;
 
---- ejercicio 01
+--- ejercicio 02
 -- Mostrar el número de indicadores que tiene a cargo cada empleado
 
 SELECT 
-	ti.nombre AS 'tipo_indicador',
+	e.nombres AS 'empleado',
 	count(i.id) AS 'num_indicadores'
 FROM indicadores i
-	INNER JOIN tipos_indicador ti ON ti.id=i.tipo_indicador_id
-GROUP BY ti.nombre;
+	INNER JOIN empleados e ON e.id=i.empleado_id
+GROUP BY e.nombres;
+
+-- ejercicio 03
+-- Mostrar el numero de empleados por cada unidad, ordenados de mayor a menor
+SELECT
+	unidad,
+	count(id) AS 'num_empleados'
+FROM empleados
+GROUP BY unidad
+ORDER BY 2 DESC;
+
+-- ejercicio 04
+-- Mostrar el numero de empleados por cada unidad, ordenados de mayor a menor.
+--- Solo considerar las unidades que tengan mas de 3 empleados
+SELECT
+	unidad,
+	count(id) AS 'num_empleados'
+FROM empleados
+GROUP BY unidad
+HAVING count(id)>3
+ORDER BY 2 DESC;
 
