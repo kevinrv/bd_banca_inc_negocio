@@ -144,6 +144,8 @@ ORDER BY 2 DESC;
 
 SELECT*FROM ubigeos;
 
+DROP TABLE ubigeos;
+
 CREATE TABLE ubigeos(
 id INT IDENTITY(1,1) PRIMARY KEY,
 ubigeo CHAR(6) UNIQUE NOT NULL,
@@ -154,4 +156,47 @@ region_natural VARCHAR(55) NOT NULL
 );
 
 --Zonas
+ALTER TABLE zonas
+ADD CONSTRAINT fk_ubigeo_zonas FOREIGN KEY (ubigeo_id) REFERENCES ubigeos(id);
+
+SELECT*FROM zonas;
+
+--Eliminar columnas
+ALTER TABLE zonas
+DROP COLUMN ubigeo_id;
+
+--Eliminar CONSTRAINTS
+ALTER TABLE sucursales 
+DROP CONSTRAINT FK__sucursale__zona___52593CB8;
+
+EXEC SP_HELP sucursales;
+
+-- CREATE TABLE zona_ubigeos
+
+CREATE TABLE zona_ubigeos (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+	zona_id INT NOT NULL,
+    ubigeo_id INT NOT NULL,
+    FOREIGN KEY (zona_id) REFERENCES zonas(id),
+    FOREIGN KEY (ubigeo_id) REFERENCES ubigeos(id)
+);
+
+DROP TABLE zona_ubigeos;
+EXEC SP_HELP zona_ubigeos;
+
+ALTER TABLE zona_ubigeos
+ADD CONSTRAINT fk_zona_id FOREIGN KEY (zona_id) REFERENCES zonas(id);
+
+ALTER TABLE zona_ubigeos
+ADD CONSTRAINT fk_ubigeo_id FOREIGN KEY (ubigeo_id) REFERENCES ubigeos(id);
+-- Agregar FK a Sucursales
+SELECT*FROM sucursales;
+
+EXEC SP_HELP sucursales;
+
+ALTER TABLE sucursales
+ADD CONSTRAINT fk_sucursales_zona_ubigeos FOREIGN KEY (zona_ubigeo_id) REFERENCES zona_ubigeos(id);
+
+ALTER TABLE sucursales
+DROP CONSTRAINT FK__sucursale__geren__534D60F1;
 
