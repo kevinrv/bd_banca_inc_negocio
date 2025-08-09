@@ -140,3 +140,18 @@ GROUP BY unidad
 HAVING count(id)>3
 ORDER BY 2 DESC;
 
+--ubigeos
+
+SELECT*FROM ubigeos;
+
+CREATE TABLE ubigeos(
+id INT IDENTITY(1,1) PRIMARY KEY,
+ubigeo CHAR(6) UNIQUE NOT NULL,
+departamento VARCHAR(100) NOT NULL,
+provincia VARCHAR(155) NOT NULL,
+distrito VARCHAR(155) NOT NULL,
+region_natural VARCHAR(55) NOT NULL
+);
+
+--Zonas
+
