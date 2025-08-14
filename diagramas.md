@@ -5,6 +5,6 @@
 <img width="1610" height="692" alt="bd_banca_inc_negocio_1" src="https://github.com/user-attachments/assets/a79c2904-f636-4202-86ed-0dacf718db62" />
 
 # Diseño fisico:
+<img width="908" height="641" alt="image" src="https://github.com/user-attachments/assets/71f5bf14-7e7c-4118-84ff-edd9bdad2171" />
 
-<img width="991" height="726" alt="image" src="https://github.com/user-attachments/assets/c70d44ac-3df0-46b5-8e2b-4fca2e7e957b" />
 
