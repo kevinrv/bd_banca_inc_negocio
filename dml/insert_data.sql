@@ -200,3 +200,27 @@ ADD CONSTRAINT fk_sucursales_zona_ubigeos FOREIGN KEY (zona_ubigeo_id) REFERENCE
 ALTER TABLE sucursales
 DROP CONSTRAINT FK__sucursale__geren__534D60F1;
 
+
+--- Insert data zonas
+
+SELECT*FROM ubigeos  WHERE region_natural NOT IN ('SELVA ALTA','SELVA BAJA','SIERRA','COSTA');
+
+DELETE FROM ubigeos WHERE id=1892;
+
+SELECT*FROM zonas;
+
+INSERT INTO zonas
+SELECT 
+DISTINCT TRIM(CONCAT(SUBSTRING(region_natural,1,3),SUBSTRING(region_natural,7,1),ROUND(RAND()*100,0))) AS 'codigo',
+region_natural AS 'nombre'
+FROM ubigeos;
+
+UPDATE u SET u.zona_id = z.id
+FROM ubigeos u
+INNER JOIN zonas z ON u.region_natural=z.nombre
+
+
+SELECT*FROM sucursales;
+
+
+-- Insert Sucursales
