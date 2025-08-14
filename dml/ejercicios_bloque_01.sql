@@ -23,9 +23,21 @@ ORDER BY nombres ASC;
 /*
 Indicadores registrados
 Mostrar todos los indicadores con su codigo, nombre y unidad_medida.
+*/
+
+SELECT codigo, nombre, unidad_medidaFROM indicadores;
+/*
 
 Buscar empleados por unidad
-Listar nombres, apellidos y cargo de los empleados que trabajen en la unidad 'Comercial'.
+Listar nombres, apellidos y cargo de los empleados que trabajen en la unidad 'Comercial'.*/
+
+SELECT 
+	CONCAT(nombres,' ',
+	apellidos) AS 'Empleado',
+	cargo
+FROM empleados
+WHERE unidad='comercial';
+/*
 
 Ubigeos por región
 Mostrar todos los ubigeos que pertenezcan a la región natural 'Costa'.
