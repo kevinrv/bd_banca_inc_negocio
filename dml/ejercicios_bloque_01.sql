@@ -1,3 +1,4 @@
+USE bd_banca_inc_negocio;
 /*Ejercicios Básicos
 
 Listado simple de sucursales
@@ -40,15 +41,46 @@ WHERE unidad='comercial';
 /*
 
 Ubigeos por región
-Mostrar todos los ubigeos que pertenezcan a la región natural 'Costa'.
+Mostrar todos los ubigeos que pertenezcan a la región natural 'Costa'.*/
+
+SELECT*FROM ubigeos
+WHERE region_natural='Costa';
+
+/*
 
 Ejercicios Intermedios
 
 Sucursales con ubicación
-Consultar el nombre de la sucursal, departamento, provincia y distrito usando JOIN entre sucursales y ubigeos.
+Consultar el nombre de la sucursal, departamento, provincia y distrito usando JOIN
+entre sucursales y ubigeos.*/
+
+SELECT 
+	s.nombre AS 'Sucursal',
+	u.departamento,
+	u.provincia,
+	u.distrito,
+	u.ubigeo
+FROM ubigeos u
+INNER JOIN sucursales s ON s.ubigeo_id=u.id;
+
+SELECT 
+	CASE WHEN s.nombre IS NULL THEN 'No existe sucursal' ELSE s.nombre END AS 'Sucursal',
+	u.departamento,
+	u.provincia,
+	u.distrito,
+	u.ubigeo
+FROM ubigeos u
+LEFT JOIN sucursales s ON s.ubigeo_id=u.id
+WHERE s.id IS NULL;
+
+/*
 
 Indicadores por tipo
-Listar codigo, nombre del indicador y el nombre del tipo de indicador, uniendo indicadores con tipos_indicador.
+Listar codigo, nombre del indicador y el nombre del tipo de indicador, 
+uniendo indicadores con tipos_indicador.*/
+
+
+/*
 
 Registros diarios con meta y real
 Mostrar fecha_reporte, valor_meta, valor_real y la diferencia (valor_real - valor_meta) para cada registro diario.

@@ -224,3 +224,46 @@ SELECT*FROM sucursales;
 
 
 -- Insert Sucursales
+-- Insert indicadores diarios
+
+SELECT DISTINCT unidad_medida FROM indicadores;
+
+SELECT*FROM registros_indicadores_diarios;
+
+DECLARE @Counter INT
+SET @Counter = 0
+
+WHILE @Counter < ROUND(RAND()*500000,0)
+BEGIN
+INSERT INTO registros_indicadores_diarios(sucursal_id, indicador_id,fecha_reporte,valor_meta, valor_real,created_at,create_by)
+SELECT 
+  s.id AS 'sucursal_id',
+  i.id AS 'indicador_id',
+  DATEADD(DAY, -ROUND(RAND() * 780,0), GETDATE()) AS 'fecha_reporte', -- Fecha de reporte en los últimos 2 años
+  CASE 
+	WHEN i.unidad_medida ='Índice' THEN ROUND(RAND()*3,1)+2
+	WHEN i.unidad_medida ='Monto (S/.)' THEN ROUND(RAND()*1000000,2)+20000
+	WHEN i.unidad_medida ='Número' THEN ROUND(RAND()*10000,0)+7500
+	WHEN i.unidad_medida ='Porcentaje' THEN ROUND(RAND()*150,2)
+	WHEN i.unidad_medida ='Ratio' THEN ROUND(RAND(),3)
+	WHEN i.unidad_medida ='Segundos' THEN ROUND(RAND()*270,1)+30
+  ELSE '0' END AS 'valor_meta',
+    CASE 
+	WHEN i.unidad_medida ='Índice' THEN ROUND(RAND()*4,1)+1
+	WHEN i.unidad_medida ='Monto (S/.)' THEN ROUND(RAND()*1000000,2)+10000
+	WHEN i.unidad_medida ='Número' THEN ROUND(RAND()*10000,0)+3000
+	WHEN i.unidad_medida ='Porcentaje' THEN ROUND(RAND()*120,2)
+	WHEN i.unidad_medida ='Ratio' THEN ROUND(RAND(),3)
+	WHEN i.unidad_medida ='Segundos' THEN ROUND(RAND()*330,1)+30
+  ELSE '0' END AS 'valor_real',
+  DATEADD(DAY, -ROUND(RAND() * 780,0), GETDATE()) AS 'created_at', -- Fecha de reporte en los últimos 2 años
+  ROUND(RAND()*100,0)+1 AS 'created_by'
+FROM sucursales s
+CROSS JOIN indicadores i 
+ORDER BY NEWID()
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY;
+    SET @Counter = @Counter + 1
+END;
+
+SELECT ROUND(RAND()*1000000,2)+100000;
