@@ -79,22 +79,63 @@ Indicadores por tipo
 Listar codigo, nombre del indicador y el nombre del tipo de indicador, 
 uniendo indicadores con tipos_indicador.*/
 
+SELECT
+	i.codigo,
+	i.nombre AS 'Indicador',
+	ti.nombre AS 'Tipo Indicador'
+FROM indicadores i
+INNER JOIN tipos_indicador ti ON ti.id=i.tipo_indicador_id;
 
 /*
 
 Registros diarios con meta y real
-Mostrar fecha_reporte, valor_meta, valor_real y la diferencia (valor_real - valor_meta) para cada registro diario.
+Mostrar fecha_reporte, valor_meta, valor_real y la diferencia 
+(valor_real - valor_meta) para cada registro diario.
+*/
+SELECT*FROM registros_indicadores_diarios;
+ SELECT 	fecha_reporte, 	valor_meta, 	valor_real, 	valor_real - Valor_meta as 'Variaciòn' FROM registros_indicadores_diarios;
+
+/*
 
 Cantidad de sucursales por región natural
 Contar cuántas sucursales hay agrupadas por region_natural.
+*/
+SELECT
+	u.region_natural,
+	COUNT(s.id) AS 'num_sucursales'
+FROM sucursales s
+INNER JOIN ubigeos u ON u.id=s.ubigeo_id
+GROUP BY u.region_natural;
+
+/*
+
 
 Ejercicios Avanzados
 
 Top 5 sucursales con mayor cumplimiento
-Calcular el porcentaje (valor_real / valor_meta) * 100 de cada registro diario y mostrar las 5 sucursales con mejor promedio.
+Calcular el porcentaje (valor_real / valor_meta) * 100 de cada registro diario y 
+mostrar las 5 sucursales con mejor promedio.*/
+
+SELECT TOP 5
+	s.nombre AS 'Sucursal',
+	AVG((valor_real / valor_meta) * 100) AS 'porcentage_promedio'
+FROM registros_indicadores_diarios rid
+INNER JOIN sucursales s ON s.id=rid.sucursal_id
+GROUP BY s.nombre
+ORDER BY 2 DESC;
+
+--CORREGIR BD
+UPDATE registros_indicadores_diarios SET valor_meta=valor_real*1.10
+WHERE valor_meta=0;
+
+/*
 
 Detección de desviaciones críticas
-Listar las desviaciones (diferencia_porcentual) mayores al 20%, mostrando también el nombre de la sucursal y el nombre del indicador.
+Listar las desviaciones (diferencia_porcentual) mayores al 20%, 
+mostrando también el nombre de la sucursal y el nombre del indicador.*/
+
+
+/*
 
 Histórico de reportes por empleado
 Mostrar cuántos registros diarios ha reportado cada empleado (usando JOIN entre indicadores, registros diarios y empleados).
