@@ -133,23 +133,68 @@ WHERE valor_meta=0;
 Detección de desviaciones críticas
 Listar las desviaciones (diferencia_porcentual) mayores al 20%, 
 mostrando también el nombre de la sucursal y el nombre del indicador.*/
+--Previa
+INSERT INTO desviaciones_indicadores
+SELECT 
+	id AS 'registro_diario_idicador_id',
+	valor_real-valor_meta AS 'diferencia_absoluta',
+	((valor_real-valor_meta)/valor_meta)*100 AS 'diferencia_porcentual',
+	CASE 
+		WHEN ((valor_real-valor_meta)/valor_meta)*100 <=-20 THEN 'Crítico'
+		WHEN ((valor_real-valor_meta)/valor_meta)*100 <=-10 THEN 'Bajo'
+		WHEN ((valor_real-valor_meta)/valor_meta)*100 <=10 THEN 'Cumplido'
+		WHEN ((valor_real-valor_meta)/valor_meta)*100 <=20 THEN 'Sobre la meta'
+		WHEN ((valor_real-valor_meta)/valor_meta)*100 <=50 THEN 'Excelente'
+		WHEN ((valor_real-valor_meta)/valor_meta)*100 >=50 THEN 'Excepcional'
+	ELSE 
+		'No Tipificado'
+	END AS 'clasificacion'
+FROM registros_indicadores_diarios;
+
+--  Resolución
+SELECT
+	s.nombre AS 'Sucursal',
+	i.nombre AS 'Indicador',
+	di.diferencia_porcentual,
+	di.clasificación
+FROM desviaciones_indicadores di
+INNER JOIN registros_indicadores_diarios rid ON rid.id=di.registro_diario_indicador_id
+INNER JOIN sucursales s ON s.id=rid.sucursal_id
+INNER JOIN indicadores i ON i.id=rid.indicador_id
+WHERE di.diferencia_porcentual>20;
 
 
 /*
 
 Histórico de reportes por empleado
-Mostrar cuántos registros diarios ha reportado cada empleado (usando JOIN entre indicadores, registros diarios y empleados).
+Mostrar cuántos registros diarios ha reportado cada empleado
+(usando JOIN entre indicadores, registros diarios y empleados).*/
+SELECT
+	CONCAT(e.nombres,' ', e.apellidos) AS 'empleado',
+	COUNT(rid.id) AS 'num_registros'
+FROM empleados e
+INNER JOIN indicadores i ON i.empleado_id=e.id
+INNER JOIN registros_indicadores_diarios rid ON rid.indicador_id=i.id
+GROUP BY e.nombres, e.apellidos
+ORDER BY 2 DESC;
+
+/*
 
 Sucursales sin gerente asignado
-Listar id, nombre y email de todas las sucursales cuyo gerente_id esté en NULL.
+Listar id, nombre y email de todas las sucursales cuyo gerente_id esté en NULL.*/
+Tarea
+/*
 
 Ejercicios con Procedimientos y Funciones
 
 Procedimiento de inserción de sucursal
-Crear un procedimiento almacenado que reciba datos de una nueva sucursal y valide que el código no exista antes de insertarla.
+Crear un procedimiento almacenado que reciba datos de una nueva sucursal y 
+valide que el código no exista antes de insertarla.
 
 Función de cumplimiento promedio
-Crear una función escalar que reciba el id de una sucursal y retorne el porcentaje promedio de cumplimiento (valor_real / valor_meta * 100).
+Crear una función escalar que reciba el id de una sucursal y retorne el 
+porcentaje promedio de cumplimiento (valor_real / valor_meta * 100).
 
 Trigger de control de valores negativos
-Crear un trigger que impida insertar en registros_indicadores_diarios un valor_real o valor_meta menor a 0.*/
+Crear un trigger que impida insertar en registros_indicadores_diarios un
+valor_real o valor_meta menor a 0.*/
