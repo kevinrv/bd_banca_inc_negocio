@@ -7,4 +7,9 @@
 # Diseño fisico:
 <img width="908" height="641" alt="image" src="https://github.com/user-attachments/assets/71f5bf14-7e7c-4118-84ff-edd9bdad2171" />
 
+# Modelo Dimensional
+
+<img width="1093" height="762" alt="image" src="https://github.com/user-attachments/assets/c3bd4ae2-cda7-476d-9383-f5f08afd19c2" />
+
+
 
