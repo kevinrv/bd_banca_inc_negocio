@@ -65,3 +65,23 @@ SELECT
 	valor_real-valor_meta AS 'desviacion_diferencial'
 FROM registros_indicadores_diarios rid
 INNER JOIN desviaciones_indicadores di ON di.registro_diario_indicador_id=rid.id;
+
+---
+USE dw_banca_inc_negocio;
+
+SELECT*FROM dim_tiempo;
+SELECT*FROM dim_indicador;
+SELECT*FROM dim_alerta;
+SELECT*FROM dim_sucursal;
+SELECT*FROM hechos_indicadores;
+
+DELETE FROM hechos_indicadores;
+DBCC CHECKIDENT('hechos_indicadores', RESEED, 1);
+DELETE FROM dim_tiempo;
+DBCC CHECKIDENT('dim_tiempo', RESEED, 1);
+DELETE FROM dim_indicador;
+DBCC CHECKIDENT('dim_indicador', RESEED, 1);
+DELETE FROM dim_alerta;
+DBCC CHECKIDENT('dim_alerta', RESEED, 1);
+DELETE FROM dim_sucursal;
+DBCC CHECKIDENT('dim_sucursal', RESEED, 1);
