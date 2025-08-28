@@ -35,3 +35,33 @@ SELECT
 	i.unidad_medida
 FROM indicadores i
 INNER JOIN tipos_indicador ti ON ti.id=i.tipo_indicador_id;
+
+-- Dim Alertas
+
+SELECT
+	id AS 'desviacion_indicador_id',
+	clasificación,
+	CASE 
+		WHEN clasificación='Excepcional' THEN 'AZUL'
+		WHEN clasificación='Bajo' THEN 'NARANJA'
+		WHEN clasificación='Sobre la meta' THEN 'VERDE'
+		WHEN clasificación='Cumplido' THEN 'AMARILLO'
+		WHEN clasificación='Crítico' THEN 'ROJO'
+		WHEN clasificación='Excelente' THEN 'CELESTE'
+	ELSE
+		'BLANCO'
+	END AS 'Color'
+FROM desviaciones_indicadores;
+
+-- hechos indicadores
+
+SELECT
+	rid.fecha_reporte AS 'fecha_registro',
+	rid.sucursal_id,
+	rid.indicador_id,
+	di.id AS alerta_id,
+	valor_real,
+	valor_meta,
+	valor_real-valor_meta AS 'desviacion_diferencial'
+FROM registros_indicadores_diarios rid
+INNER JOIN desviaciones_indicadores di ON di.registro_diario_indicador_id=rid.id;
