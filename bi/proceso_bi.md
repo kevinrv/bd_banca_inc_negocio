@@ -10,3 +10,10 @@
 ### part3
 <img width="775" height="475" alt="image" src="https://github.com/user-attachments/assets/460a56eb-3bae-4116-899f-231f49dee36d" />
 
+## Cubo con SASS
+<img width="758" height="512" alt="image" src="https://github.com/user-attachments/assets/e6bd7eb4-3922-4ad2-bc8c-5b3a29299108" />
+
+### EXPLORACION DATA
+<img width="1215" height="541" alt="image" src="https://github.com/user-attachments/assets/c3c29ef2-627b-4145-b4f8-cfcfdb2a0625" />
+
+
